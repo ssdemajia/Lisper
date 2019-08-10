@@ -1,4 +1,3 @@
-const url = 'http://localhost:5000/oauth/login'
 let login_href = document.querySelector('#login-href'); // 登陆的链接
 let login_user = document.querySelector('.login-user');  // 登陆后用户头像
 let input_button = document.querySelector('.input-button'); // 用于提交评论的按钮
@@ -50,7 +49,7 @@ function setUser(user, el) {
   });
 }
 function getUser() {
-  return Request('http://localhost:5000/user', 'GET').then(result => {
+  return Request('/user', 'GET').then(result => {
     if ('login' === result.status) {
       return;
     }
@@ -65,7 +64,6 @@ function getComments() {
   const param = [`id=${config.id}`, `page=${config.page}`].join('&');
   return Request('/comments?'+param, 'get').then(res => {
     if (res.status === 'success') {
-      console.log(res);
       comment_container.comments = res.value;
       comment_num.innerText = res.value.length;
     } 
@@ -119,7 +117,7 @@ window.addEventListener('load', e => {
 });
 
 login_href.addEventListener('click', _ => {
-  win = window.open(url);
+  win = window.open('/oauth/login');
   intervaler = setInterval(intervalHandle, 100);
 });
 
