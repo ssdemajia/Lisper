@@ -13,8 +13,8 @@ class Comment {
   static delete(id) {
     return db('comment').where({ id }).delete();
   }
-  static findContent(content) {
-    return db('comment').select('id');
+  static findContent(page, content) {
+    return db('comment').where({ page, content }).select('id');
   }
 }
 module.exports.Comment = Comment;

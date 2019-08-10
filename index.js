@@ -117,8 +117,9 @@ app.post('/comments', async (req, res, next) => {
   const comment = req.body.comment;
   const page = req.body.page;
   const page_user = req.body.id;
-  const content = await Comment.findContent(comment);
-  if (content) {
+  const content = await Comment.findContent(page, comment);
+  console.log('[/comments] find content:', content)
+  if (content.length != 0) {
     res.send({ status: 'repeat'});
     return;
   }
