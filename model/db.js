@@ -4,8 +4,8 @@ const db = knex({
   client: 'mysql',
   connection: {
     host : '127.0.0.1',
-    user : 'root',
-    password : 'shaoshuai',
+    user : 'shaoshuai',
+    password : 'Shaoshuai1105',
     database : 'dowob'
   }
 });

@@ -21,6 +21,7 @@ const commentP = db.schema.hasTable('comment').then(exist => {
       table.string('page', 128);
       table.text('content');
       table.index(['page', 'page_user']);
+      table.index(['content']);
     }).then();
   }
 });

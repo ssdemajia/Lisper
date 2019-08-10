@@ -142,5 +142,9 @@ input_button.addEventListener('click', e => {
       Tips(tips, 2000, '请登陆后再评论');
       return;
     }
+    if (res.status == 'repeat') {
+      Tips(tips, 2000, '评论内容重复');
+      return;
+    }
   });
 });

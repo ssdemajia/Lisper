@@ -2,7 +2,7 @@ let iframe = document.createElement('iframe');
 iframe.frameBorder = 0;
 iframe.style.width = '100%';
 iframe.scrolling = 'no';
-iframe.src = 'http://comment.dowob.cn/comments'
+iframe.src = 'https://comment.dowob.cn/comments'
 const config = window.commentConfig;
 config.el.appendChild(iframe);
 

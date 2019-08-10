@@ -23,18 +23,20 @@ app.use(session({
 }))
 
 app.get('/oauth/login', (req, res) => {
-  const dowob_id = req.signedCookies.dowob_id;
-  if (!dowob_id) {
-    const redirectURI = 'http://localhost:5000/oauth';
+  const user = req.session.user;
+  if (!user) {
+    console.log('[/oauth/login]github login');
+    const redirectURI = 'https://comment.dowob.cn/oauth';
     const oAuthURL = `https://github.com/login/oauth/authorize?response_type=code&client_id=${Config.client_id}&redirect_uri=${redirectURI}`;
     res.redirect(oAuthURL);
     return;
   }
+  res.render('blank.ejs')
 });
 
 app.get('/oauth', (req, res) => {
   const code = req.query.code;
-  console.log(`code:${code}`)
+  console.log(`[/oauth]code:${code}`)
   axios({
     method: 'post',
     url: 'https://github.com/login/oauth/access_token?' +
@@ -46,7 +48,7 @@ app.get('/oauth', (req, res) => {
     }
   }).then(result => {
     const accessToken = result.data.access_token;
-    console.log('accessToken:', accessToken);
+    console.log('[/oauth]accessToken:', accessToken);
     return axios({
       method: 'get',
       url: 'https://api.github.com/user',
@@ -61,21 +63,24 @@ app.get('/oauth', (req, res) => {
     const github_url = result.data.html_url;
     const blog_url = result.data.blog;
     const avatar_url = result.data.avatar_url;
-    const user = await User.find(id);
+    let user = await User.find(id);
     if (!user) {
-      User.create({
+      console.log('[/oauth]create user:' + github_url);
+      await User.create({
         id,
         github_url,
         avatar_url,
         name,
         blog_url
-      }).then(v => {
-        console.log(v);
-      })
+      });
+      user = await User.find(id);
     }
-    console.log('github_id:', id);
+    console.log('[/oauth]github id:' + id);
+    console.log('[/oauth]session user:', user);
     req.session.user = user;
     res.render('blank.ejs')
+  }).catch(err => {
+    res.render('error.ejs')
   })
 });
 
@@ -103,7 +108,7 @@ app.get('/user', (req, res, next) => {
   }
 })
 
-app.post('/comments', (req, res, next) => {
+app.post('/comments', async (req, res, next) => {
   const user = req.session.user;
   if (!user) {
     res.send({ status: 'login' });
@@ -112,6 +117,11 @@ app.post('/comments', (req, res, next) => {
   const comment = req.body.comment;
   const page = req.body.page;
   const page_user = req.body.id;
+  const content = await Comment.findContent(comment);
+  if (content) {
+    res.send({ status: 'repeat'});
+    return;
+  }
   Comment.create({
     page_user,
     page,
@@ -134,7 +144,7 @@ app.delete('/comments', (req, res) => {
   })
 })
 app.listen(5000, () => {
-  console.log('app on http://localhost:5000')
+  console.log('app started')
 })
 
 module.exports = app; // 用于nodemon
