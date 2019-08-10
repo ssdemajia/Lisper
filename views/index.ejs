@@ -1,0 +1,47 @@
+<html>
+<head>
+  <title>SS</title>
+</head>
+<link rel="stylesheet" href="/css/index.css">
+<body>
+  <div class="comment-container">
+    <div class="comment-nav">
+      <span class="comments"><span class="comment-num"></span>条评论</span>
+      <div class="login">
+        <a href="javascript:void(0)" id="login-href">使用github登录</a>
+        <span class="login-user">
+          <img class="avatar">
+          <a href="javascript:void(0)" class="github-url"></a>
+        </span>
+      </div>
+    </div>
+    <div class="input-area">
+      <textarea class="input-textarea" row="3" placeholder="说点啥吧"></textarea>
+      <div class="input-control">
+        <span class="tips"></span>
+        <button class="input-button">评论</button>
+      </div>
+    </div>
+    <div id="comments">
+      <div class="comment" v-for="comment in comments" :v-key="comment.create_at">
+        <div class="comment-image">
+          <img class="avatar" :src="comment.avatar_url">
+        </div>
+        <div class="comment-item">
+          <div class="comment-item-header">
+            <span class="comment-username">{{ comment.name }}</span>
+            <span class="comment-date">{{ formatDate(comment.create_at) }} </span>
+          </div>
+          <div class="comment-item-content">
+            {{ comment.content }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script src="/js/index.js"></script>
+</html>

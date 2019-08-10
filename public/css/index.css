@@ -1,0 +1,117 @@
+body {
+  margin: 0px;
+}
+
+.comment-container a {
+  text-decoration: none;
+  color: #f58b54;
+  font-weight: 800;
+  vertical-align: middle;
+}
+
+.comment-nav {
+  height: 48px;
+  line-height: 48px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 75%;
+  border: 0px;
+  vertical-align: middle;
+}
+
+.comments {
+  color: #f58b54;
+  font-weight: 800;
+  vertical-align: middle;
+}
+
+.login {
+  float: right;
+}
+
+.login-user {
+  display: none;
+}
+
+.github-url {
+  text-decoration: none;
+  line-height: 48px;
+}
+
+.input-area .input-textarea {
+  background: #3a2d2d;
+  width: 100%;
+  height: 60px;
+  padding: 4px 10px;
+  border: 3px solid #3a2d2d;
+  font-size: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  border-radius: 8px;
+  color: #eee;
+  transition: border-color .15s linear;
+}
+.input-area .input-textarea:focus {
+  outline: none;
+  border: 3px solid #f58b54;
+}
+.input-control .input-button {
+  float: right;
+  line-height: 2;
+  padding: 0 16px;
+  font-size: 16px;
+  color: #2a1d1d;
+  background: #a34a28;
+  outline: none;
+  font-weight: 800;
+  border: 0px;
+  border-radius: 4px;
+}
+.input-control .input-button:active {
+  color: #3a2d2d;
+  background: #a04020;
+  outline: none;
+  border: 0px;
+  border-radius: 4px;
+}
+.input-control .tips {
+  color: #a34a28;
+  font-weight: 700;
+}
+.input-control {
+  padding-top: 8px;
+  overflow: hidden;
+}
+
+#comments {
+  color: #dfddc7;
+  margin-top: 8px;
+}
+
+.comment {
+  display: flex;
+  border-top: 1px solid rgba(163, 74, 40, 0.5);
+  padding: 8px 0;
+}
+.comment .comment-image {
+  padding: 8px;
+}
+.comment .comment-item {
+  width: 100%;
+}
+.comment .comment-item .comment-item-content {
+  padding-top: 4px;
+}
+.comment .comment-item-header .comment-username {
+  color: #f58b54;
+  font-size: 13px;
+}
+.comment .comment-item-header .comment-date {
+  color: #858C96;
+  float: right;
+  font-weight: 700;
+  font-size: 13px;
+}
