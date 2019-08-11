@@ -5,7 +5,7 @@ let comment_container;
 let comment_num = document.querySelector('.comment-num'); // 评论数
 let input_textarea = document.querySelector('.input-textarea');
 let tips = document.querySelector('.tips'); // 操作提示
-let win, intervaler, config;
+let win, config;
 
 function Tips(el, timeout, message) {
   el.innerText = message;
@@ -68,11 +68,6 @@ function getComments() {
       comment_num.innerText = res.value.length;
     } 
   });
-}
-
-function intervalHandle() {
-  if (!win || !win.closed) return;
-  clearInterval(intervaler);
 }
 
 function notifyHeight() {

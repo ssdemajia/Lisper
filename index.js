@@ -1,4 +1,5 @@
 const express = require('express');
+const xss = require('xss');
 const cookieParser = require('cookie-parser');
 const axios = require('axios');
 const session = require('express-session');
@@ -114,7 +115,7 @@ app.post('/comments', async (req, res, next) => {
     res.send({ status: 'login' });
     return;
   }
-  const comment = req.body.comment;
+  const comment = xss(req.body.comment);
   const page = req.body.page;
   const page_user = req.body.id;
   const content = await Comment.findContent(page, comment);
