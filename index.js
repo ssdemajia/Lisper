@@ -15,7 +15,7 @@ const secret_code = buildRandStr(16);
 
 app.set('port', process.env.PORT || 3000);
 
-Sentry.init({ dsn: ''});
+Sentry.init({ dsn: 'https://fdd0a15707d44b0d8115350b5825e1d7@sentry.io/1528919'});
 app.use(Sentry.Handlers.requestHandler());
 
 app.use(express.static('public'))
@@ -160,6 +160,13 @@ app.use(Sentry.Handlers.errorHandler({
     return error.status === 404 || error.status === 500;
   }
 }));
+
+app.use(function onError(err, req, res, next) {
+  // The error id is attached to `res.sentry` to be returned
+  // and optionally displayed to the user for support.
+  res.statusCode = 500;
+  res.end(res.sentry + "\n");
+});
 
 app.listen(5000, () => {
   console.log('app started')
