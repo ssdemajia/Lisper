@@ -152,9 +152,6 @@ app.delete('/comments', (req, res) => {
 });
 
 app.use(Sentry.Handlers.errorHandler());
-app.get('/debug-sentry', (req, res) => {
-  throw new Error('My first Sentry error');
-});
 
 app.listen(80, () => {
   console.log('app started')
