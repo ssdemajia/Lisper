@@ -1,4 +1,5 @@
 const express = require('express');
+const Sentry = require('@sentry/node');
 const xss = require('xss');
 const cookieParser = require('cookie-parser');
 const axios = require('axios');
@@ -13,6 +14,10 @@ const app = express();
 const secret_code = buildRandStr(16);
 
 app.set('port', process.env.PORT || 3000);
+
+Sentry.init({ dsn: ''});
+app.use(Sentry.Handlers.requestHandler());
+
 app.use(express.static('public'))
 app.use(bodyPaser.json())
 app.use(bodyPaser.urlencoded({ extended: true }));
@@ -144,7 +149,18 @@ app.delete('/comments', (req, res) => {
   Comment.delete(id).then(res => {
     console.log(res);
   })
-})
+});
+
+app.get('/debug-sentry', (req, res) => {
+  throw new Error('My first Sentry error');
+});
+
+app.use(Sentry.Handlers.errorHandler({
+  shouldHandleError(error) {
+    return error.status === 404 || error.status === 500;
+  }
+}));
+
 app.listen(5000, () => {
   console.log('app started')
 })
