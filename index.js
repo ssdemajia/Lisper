@@ -1,4 +1,5 @@
 const path = require('path');
+const favicon = require('serve-favicon');
 const fs = require('fs');
 const rfs = require('rotating-file-stream')
 const express = require('express');
@@ -45,6 +46,7 @@ app.use('/', indexRouter);
 app.use('/api', apiRouter);
 app.use('/user', userRouter);
 app.use('/comment', commentRouter);
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 if (process.env.NODE_ENV === 'production') {
   // Sentry注册
