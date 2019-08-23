@@ -4,10 +4,7 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-  debug(req.accepts())
-  res.render('comment_index', {
-    pageTestScript: '/qa/test-comment-index.js'
-  });
+  res.redirect('http://127.0.0.1:9999/');
 });
 
 module.exports = router;

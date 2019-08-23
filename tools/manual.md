@@ -43,15 +43,6 @@ lisper: 11012329
 8. 将上面的插件加载代码插入，将里面的地址`commentScript.src = 'https://comment.dowob.cn/js/comment.js';` 改为你的服务器地址。
 9. done
 
-因为使用`.env`文件来作为配置文件，需要在服务端根目录新增一个`.env`文件，里面包含：
-```
-CLIENT_ID=3233ad255dsa0a93c87b4e9
-CLIENT_SECRET_ID=badsadsb5f32ad54200cba87c1b42f975c7bd47a400e8
-DB_HOST=127.0.0.1
-DB_NAME=dowob
-DB_USER=wdsads
-DB_PASSWORD=dsahaodsadshuai1105
-```
 ## 遇到问题
 
 提issue或者邮件联系2chashao@gmail.com
@@ -66,4 +57,4 @@ DB_PASSWORD=dsahaodsadshuai1105
 - [ ] 支持微信登陆
 - [ ] 支持qq登陆
 
-## 更新历史
+# 

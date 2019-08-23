@@ -3,7 +3,8 @@
   "ignore": [
       ".git",
       "node_modules/**/node_modules",
-      "public"
+      "public",
+      "lisper"
   ],
   "verbose": true,
   "execMap": {

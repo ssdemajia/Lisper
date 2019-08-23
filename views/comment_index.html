@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Lisper评论插件</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/comment_index.css">
 </head>
+
 <body>
   <div class="container">
     <nav class="navbar lisper-nav">
@@ -15,17 +18,54 @@
         <img src="/img/icons-bird.png" alt="lisper icon">
         <span class="lisper-title">Lisper</span>
       </div>
-      <div>
-        <a href="">登陆</a>
+      <div class="btn btn-success">
+        <a href="/oauth/login">登陆</a>
       </div>
     </nav>
+    <main>
+      <article class="manual">
+        <h1>Lisper</h1>
+        <p>
+          Lisper是静态博客hexo的一个评论插件，访问<a href="https://dowob.cn">https://dowob.cn</a> 查看示例。
+        </p>
+
+        <h2>hexo插件安装</h2>
+        <p>适合没有服务器，博客部署在github page上的童鞋，使用我的服务器作为后端。</p>
+
+        <p>在hexo模版中插入下面的代码</p>
+<pre>
+script(type='text/javascript').
+  window.commentConfig = {
+    page: '#{page.path}',
+    id: #{theme.lisper},
+    el: document.getElementById('comments')
+  };
+  (function() {
+    var commentScript = document.createElement('script');
+    commentScript.type = 'text/javascript';
+    commentScript.async = true;
+    commentScript.src = 'https://comment.dowob.cn/js/comment.js';
+    (document.getElementsByTagName('head')[0]||document.getElementsByName('body')[0]).appendChild(commentScript);
+  })();
+</pre>
+
+        在hexo模版的配置文件(_config.yml)中添加：
+        lisper: 11012329
+        这个数字是github 用户id，需要登陆https://comment.dowob.cn 获取。
+      </article>
   </div>
-  
+  </main>
+  </div>
 
 
-<%- include('test_content.html') -%>
+
+  <%- include('test_content.html') -%>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </html>
