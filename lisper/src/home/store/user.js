@@ -27,6 +27,21 @@ const userStore = {
             ctx.commit('setUser', user);
           }
         })
+    },
+    getInfo(ctx) {
+      return fetch(`/api/user/`)
+        .then(data => data.json())
+        .then(data => {
+          if (data.status === 'success') {
+            ctx.commit('setUser', data.value);
+          }
+          return data.status;
+        })
+    }
+  },
+  getters: {
+    isLogging(state) {
+      return state.id !== 0;
     }
   }
 };

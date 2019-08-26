@@ -5,7 +5,9 @@
       <div class="lisper-title">Lisper</div>
     </div>
     <div class="login">
-      <img v-if="hasLogin" class="avatar" :src="avatar" />
+      <router-link v-if="hasLogin" to="/console">
+        <img class="avatar" :src="avatar" />
+      </router-link>
       <a v-else @click="loginUrl">登陆</a>
     </div>
   </nav>
@@ -13,12 +15,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-    };
-  },
   created() {
     window.addEventListener("storage", this.afterLogin);
+    this.$store.dispatch('getInfo');
   },
   destroyed() {
     window.removeEventListener("storage", this.afterLogin);
@@ -42,7 +41,7 @@ export default {
         .then(_ => {
           this.$router.push('/console')
         })
-        .catch(err => {
+        .catch(_ => {
           this.$message("登陆失败");
         });
     }
@@ -101,6 +100,10 @@ export default {
       border-radius: 75%;
       border: 2px solid white;
       vertical-align: middle;
+      transition: transform 0.5s ease;
+      &:hover {
+        transform: rotate(360deg);
+      }
     }
   }
 }

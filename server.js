@@ -14,18 +14,11 @@ const bodyPaser = require('body-parser');
 const apiRouter = require('./routers/api');
 const userRouter = require('./routers/user');
 const indexRouter = require('./routers/index');
-const commentRouter = require('./routers/comment');
 
 const app = express();
 const secret_code = buildRandStr(16);
 
-app.disable('x-powered-by');
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
-// 使用bootstrap
-app.use(
-  '/css/bootstrap.css', express.static('node_modules/bootstrap/dist/css/bootstrap.min.css')
-);
+
 // 静态文件处理，服务器上使用nginx
 app.use(express.static('public'))
 app.use(bodyPaser.json())
@@ -46,7 +39,6 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 app.use('/user', userRouter);
-app.use('/comment', commentRouter);
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
 if (process.env.NODE_ENV === 'production') {

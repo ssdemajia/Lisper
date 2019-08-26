@@ -19,8 +19,12 @@ body {
   margin: 0px;
 }
 </style>
-<style lang="scss" scoped>
+<style lang="scss">
+html, body {
+  height: 100%;
+}
 main {
+  // height: 100%;
   margin: 0 auto;
   max-width: 960px;
   background: #fff;
